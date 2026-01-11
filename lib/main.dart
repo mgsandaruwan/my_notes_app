@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:my_notes_app/Screens/NotesListScreen.dart'
 
 // Initialize Supabase (Replace with your credentials)
 const supabaseUrl = "https://wrwhcnatqlyttpkoivgk.supabase.co";
