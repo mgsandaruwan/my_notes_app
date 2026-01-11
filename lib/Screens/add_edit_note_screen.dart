@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../models/note.dart';
+import '../Models/note.dart';
 import '../services/note_service.dart';
 
 class AddEditNoteScreen extends StatefulWidget {

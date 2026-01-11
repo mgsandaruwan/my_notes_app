@@ -1,4 +1,3 @@
-// Models
 class Note {
   final String id;
   final String title;
@@ -16,11 +15,11 @@ class Note {
 
   factory Note.fromJson(Map<String, dynamic> json) {
     return Note(
-      id: json['id'],
-      title: json['title'] ?? '',
-      description: json['description'] ?? '',
-      isFavorite: json['is_favorite'] ?? false,
-      createdAt: DateTime.parse(json['created_at']),
+      id: json['id'].toString(),
+      title: json['title']?.toString() ?? '',
+      description: json['description']?.toString() ?? '',
+      isFavorite: json['is_favorite'] == true,
+      createdAt: DateTime.parse(json['created_at'].toString()),
     );
   }
 

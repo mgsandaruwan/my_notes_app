@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:my_notes_app/Screens/NotesListScreen.dart'
+import 'Screens/NotesListScreen.dart';
 
 // Initialize Supabase (Replace with your credentials)
-const supabaseUrl = "https://wrwhcnatqlyttpkoivgk.supabase.co";
-const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indyd2hjbmF0cWx5dHRwa29pdmdrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc5NTIzODYsImV4cCI6MjA4MzUyODM4Nn0._Em5fINj9EaPgaqa3flBYGLVPNX27X_46uoLudqPrRc";
-
+const supabaseUrl = 'https://knnervorruznzsnytqjq.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtubmVydm9ycnV6bnpzbnl0cWpxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjgxMjAxNTgsImV4cCI6MjA4MzY5NjE1OH0.INDJ9iByPoO7sgna-tX8edIeCrEQpyFgf-LmUfd6ixI';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,14 +18,13 @@ void main() async {
   runApp(const MyApp());
 }
 
-final supabase = Supabase.instance.client;
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Note App',
       theme: ThemeData(
         brightness: Brightness.dark,

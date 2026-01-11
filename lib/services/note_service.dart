@@ -1,5 +1,5 @@
-import '../config/supabase_config.dart';
-import '../models/note.dart';
+import '../config/supabase_config.dart' hide Note;
+import '../Models/note.dart';
 
 class NoteService {
   // Fetch all notes

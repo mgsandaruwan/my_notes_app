@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../models/note.dart';
+import '../Models/note.dart';
 import '../services/note_service.dart';
-import '../widgets/note_card.dart';
+import '../Widgests/note_card.dart';
 import 'add_edit_note_screen.dart';
 
 class NotesListScreen extends StatefulWidget {
@@ -28,7 +28,7 @@ class _NotesListScreenState extends State<NotesListScreen> {
     try {
       final fetchedNotes = await _noteService.fetchNotes();
       setState(() {
-        notes = fetchedNotes;
+        notes = fetchedNotes.cast<Note>();
         isLoading = false;
       });
     } catch (e) {
