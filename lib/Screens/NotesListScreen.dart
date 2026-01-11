@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+import '../models/note.dart';
+import '../services/note_service.dart';
+import '../widgets/note_card.dart';
+import 'add_edit_note_screen.dart';
 
 class NotesListScreen extends StatefulWidget {
   const NotesListScreen({super.key});
@@ -9,6 +12,7 @@ class NotesListScreen extends StatefulWidget {
 }
 
 class _NotesListScreenState extends State<NotesListScreen> {
+  final NoteService _noteService = NoteService();
   List<Note> notes = [];
   bool showFavorites = false;
   bool isLoading = true;
@@ -22,20 +26,16 @@ class _NotesListScreenState extends State<NotesListScreen> {
   Future<void> fetchNotes() async {
     setState(() => isLoading = true);
     try {
-      final response = await supabase
-          .from('notes')
-          .select()
-          .order('created_at', ascending: false);
-
+      final fetchedNotes = await _noteService.fetchNotes();
       setState(() {
-        notes = (response as List).map((note) => Note.fromJson(note)).toList();
+        notes = fetchedNotes;
         isLoading = false;
       });
     } catch (e) {
       setState(() => isLoading = false);
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error loading notes: $e')),
+          SnackBar(content: Text(e.toString())),
         );
       }
     }
@@ -43,12 +43,12 @@ class _NotesListScreenState extends State<NotesListScreen> {
 
   Future<void> deleteNote(String id) async {
     try {
-      await supabase.from('notes').delete().eq('id', id);
+      await _noteService.deleteNote(id);
       fetchNotes();
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error deleting note: $e')),
+          SnackBar(content: Text(e.toString())),
         );
       }
     }
@@ -56,15 +56,12 @@ class _NotesListScreenState extends State<NotesListScreen> {
 
   Future<void> toggleFavorite(Note note) async {
     try {
-      await supabase
-          .from('notes')
-          .update({'is_favorite': !note.isFavorite})
-          .eq('id', note.id);
+      await _noteService.toggleFavorite(note.id, note.isFavorite);
       fetchNotes();
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error updating note: $e')),
+          SnackBar(content: Text(e.toString())),
         );
       }
     }
